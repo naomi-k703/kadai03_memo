@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイムマネジメント診断とユーザー管理</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 言語切り替えボタン -->
+    <div class="language-switcher">
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('zh')">繁體字</button>
+        <button onclick="setLanguage('ja')">日本語</button>
+    </div>
+
+    <!-- ユーザー登録セクション -->
+    <div id="registerSection" class="container">
+        <h2>新規登録</h2>
+        <form id="registerForm">
+            <label for="username">ユーザー名:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">パスワード:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">登録</button>
+        </form>
+        <p>すでにアカウントをお持ちですか？<button id="showLoginForm">ログイン</button></p>
+    </div>
+
+    <!-- ログインセクション -->
+    <div id="loginSection" class="container" style="display: none;">
+        <h2>ログイン</h2>
+        <form id="loginForm">
+            <label for="loginUsername">ユーザー名:</label>
+            <input type="text" id="loginUsername" name="loginUsername" required>
+            <label for="loginPassword">パスワード:</label>
+            <input type="password" id="loginPassword" name="loginPassword" required>
+            <button type="submit">ログイン</button>
+        </form>
+        <p>アカウントをお持ちでないですか？<button id="showRegisterForm">新規登録</button></p>
+    </div>
+
+    <!-- 進捗バー -->
+    <div class="progress-bar" aria-label="診断進行状況" style="display: none;">
+        <div id="progress" class="progress" style="width: 0%;"></div>
+    </div>
+
+    <!-- タイムマネジメント診断チェックセクション -->
+    <div id="section1" class="container" style="display: none;">
+        <h1 data-lang-ja="タイムマネジメント診断チェック" 
+            data-lang-en="Time Management Diagnosis Check" 
+            data-lang-zh="時間管理診斷檢查">タイムマネジメント診断チェック</h1>
+
+        <!-- 診断フォーム -->
+        <form id="diagnosisForm">
+
+          <!-- 設問1 -->
+<div id="q_01" class="question">
+    <label data-lang-ja="1. 長期・短期の目標が明確に設定されていますか？"
+           data-lang-en="1. Are your long-term and short-term goals clearly set?"
+           data-lang-zh="1. 您的長期和短期目標是否明確設置？">
+        1. 長期・短期の目標が明確に設定されていますか？
+    </label>
+    <div id="radio01">
+        <input type="radio" id="goalSettingYes" name="goalSetting" value="yes">
+        <label for="goalSettingYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="goalSettingNo" name="goalSetting" value="no">
+        <label for="goalSettingNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+<!-- 設問2 -->
+<div id="q_02" class="question" style="display: none;">
+    <label data-lang-ja="2. 自分の目標は具体的でわかりやすいですか？"
+           data-lang-en="2. Are your goals specific and easy to understand?"
+           data-lang-zh="2. 您的目標具體且易於理解嗎？">
+        2. 自分の目標は具体的でわかりやすいですか？
+    </label>
+    <div id="radio02">
+        <input type="radio" id="goalDefinitionYes" name="goalDefinition" value="yes">
+        <label for="goalDefinitionYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="goalDefinitionNo" name="goalDefinition" value="no">
+        <label for="goalDefinitionNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+<!-- 設問3 -->
+<div id="q_03" class="question" style="display: none;">
+    <label data-lang-ja="3. 目標実現に向けた行動計画をスケジュールに落としていますか？"
+           data-lang-en="3. Have you scheduled an action plan for achieving your goals?"
+           data-lang-zh="3. 您是否已將實現目標的行動計劃納入日程？">
+        3. 目標実現に向けた行動計画をスケジュールに落としていますか？
+    </label>
+    <div id="radio03">
+        <input type="radio" id="actionPlanYes" name="actionPlan" value="yes">
+        <label for="actionPlanYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="actionPlanNo" name="actionPlan" value="no">
+        <label for="actionPlanNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+<!-- 設問4 -->
+<div id="q_04" class="question" style="display: none;">
+    <label data-lang-ja="4. タスクの優先順位が明確になっていますか？"
+           data-lang-en="4. Are your task priorities clear?"
+           data-lang-zh="4. 您的任務優先級是否明確？">
+        4. タスクの優先順位が明確になっていますか？
+    </label>
+    <div id="radio04">
+        <input type="radio" id="prioritizationYes" name="prioritization" value="yes">
+        <label for="prioritizationYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="prioritizationNo" name="prioritization" value="no">
+        <label for="prioritizationNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+<!-- 設問5 -->
+<div id="q_05" class="question" style="display: none;">
+    <label data-lang-ja="5. タスクは整理して効率よく進められていますか？"
+           data-lang-en="5. Are your tasks organized and progressing efficiently?"
+           data-lang-zh="5. 您的任務是否井然有序並高效推進？">
+        5. タスクは整理して効率よく進められていますか？
+    </label>
+    <div id="radio05">
+        <input type="radio" id="taskManagementYes" name="taskManagement" value="yes">
+        <label for="taskManagementYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="taskManagementNo" name="taskManagement" value="no">
+        <label for="taskManagementNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+<!-- 設問6 -->
+<div id="q_06" class="question" style="display: none;">
+    <label data-lang-ja="6. タスクの重要度や緊急度に応じて、時間が効率的に使われていますか？"
+           data-lang-en="6. Are you using your time efficiently according to the importance and urgency of tasks?"
+           data-lang-zh="6. 您是否根據任務的重要性和緊迫性高效利用時間？">
+        6. タスクの重要度や緊急度に応じて、時間が効率的に使われていますか？
+    </label>
+    <div id="radio06">
+        <input type="radio" id="timeEfficiencyYes" name="timeEfficiency" value="yes">
+        <label for="timeEfficiencyYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="timeEfficiencyNo" name="timeEfficiency" value="no">
+        <label for="timeEfficiencyNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+<!-- 設問7 -->
+<div id="q_07" class="question" style="display: none;">
+    <label data-lang-ja="7. 計画通りにタスクが実行されていますか？"
+           data-lang-en="7. Are tasks being executed as planned?"
+           data-lang-zh="7. 任務是否按計劃執行？">
+        7. 計画通りにタスクが実行されていますか？
+    </label>
+    <div id="radio07">
+        <input type="radio" id="taskExecutionYes" name="taskExecution" value="yes">
+        <label for="taskExecutionYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="taskExecutionNo" name="taskExecution" value="no">
+        <label for="taskExecutionNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+<!-- 設問8 -->
+<div id="q_08" class="question" style="display: none;">
+    <label data-lang-ja="8. 中断や先延ばしを避けて、集中して取り組めていますか？"
+           data-lang-en="8. Are you avoiding interruptions and procrastination to stay focused?"
+           data-lang-zh="8. 您是否避免中斷和拖延以保持專注？">
+        8. 中断や先延ばしを避けて、集中して取り組めていますか？
+    </label>
+    <div id="radio08">
+        <input type="radio" id="productivityHindranceYes" name="productivityHindrance" value="yes">
+        <label for="productivityHindranceYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="productivityHindranceNo" name="productivityHindrance" value="no">
+        <label for="productivityHindranceNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+<!-- 設問9 -->
+<div id="q_09" class="question" style="display: none;">
+    <label data-lang-ja="9. 定期的に進捗状況をチェックするための振り返りをしていますか？"
+           data-lang-en="9. Do you regularly review your progress?"
+           data-lang-zh="9. 您是否定期審查您的進展？">
+        9. 定期的に進捗状況をチェックするための振り返りをしていますか？
+    </label>
+    <div id="radio09">
+        <input type="radio" id="progressCheckYes" name="progressCheck" value="yes">
+        <label for="progressCheckYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="progressCheckNo" name="progressCheck" value="no">
+        <label for="progressCheckNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+<!-- 設問10 -->
+<div id="q_10" class="question" style="display: none;">
+    <label data-lang-ja="10. 必要に応じて計画を見直し、調整していますか？"
+           data-lang-en="10. Do you review and adjust your plans as needed?"
+           data-lang-zh="10. 您是否根據需要審查和調整計劃？">
+        10. 必要に応じて計画を見直し、調整していますか？
+    </label>
+    <div id="radio10">
+        <input type="radio" id="planAdjustmentYes" name="planAdjustment" value="yes">
+        <label for="planAdjustmentYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="planAdjustmentNo" name="planAdjustment" value="no">
+        <label for="planAdjustmentNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+<!-- 設問11 -->
+<div id="q_11" class="question" style="display: none;">
+    <label data-lang-ja="11. フィードバックを元に改善が行われていますか？"
+           data-lang-en="11. Are you making improvements based on feedback?"
+           data-lang-zh="11. 您是否根據反饋進行改進？">
+        11. フィードバックを元に改善が行われていますか？
+    </label>
+    <div id="radio11">
+        <input type="radio" id="feedbackImprovementYes" name="feedbackImprovement" value="yes">
+        <label for="feedbackImprovementYes" class="radio04">
+            <span data-lang-ja="はい" data-lang-en="Yes" data-lang-zh="是">はい</span>
+        </label>
+
+        <input type="radio" id="feedbackImprovementNo" name="feedbackImprovement" value="no">
+        <label for="feedbackImprovementNo" class="radio04">
+            <span data-lang-ja="いいえ" data-lang-en="No" data-lang-zh="否">いいえ</span>
+        </label>
+    </div>
+</div>
+
+            <!-- 診断結果の表示エリア -->
+            <div id="result" class="result" style="display: none;">
+                <h2>あなたのタイムマネジメント進捗レベル: <span id="level"></span></h2>
+                <img id="character" src= "" alt="成長キャラクター">
+                <p id="description"></p>
+                <h3>改善ポイント</h3>
+                <ul id="improvementSteps"></ul>
+            </div>
+
+            <!-- 診断するボタン -->
+            <button id="submitButton" type="submit" style="display: none;" data-lang-ja="診断する" data-lang-en="Diagnose" data-lang-zh="診斷">診断する</button>
+        </form>
+    </div>
+
+        <!-- ダッシュボードのセクション -->
+        <div id="dashboardSection" class="container" style="display: none;">
+            <h2>成長ダッシュボード</h2>
+            
+            <!-- 1. 進捗バー -->
+            <div id="progressBarContainer">
+                <h3>レベルアップ進捗</h3>
+                <div id="progressBarBackground">
+                    <div id="progressBarFill" style="width: 0%; height: 10px; background-color: #d66b7d;"></div>
+                </div>
+            </div>
+        
+            <!-- 2. 特別なメッセージ -->
+            <div id="specialMessage">
+                <h4>特別なメッセージ:</h4>
+                <p></p> <!-- JavaScriptでメッセージを挿入 -->
+            </div>
+        
+            <!-- 3. レーダーチャートの表示エリア -->
+            <canvas id="radarChart"></canvas>
+            
+            <!-- 4. 成長マイルストーン -->
+            <h3>成長マイルストーン</h3>
+            <div id="milestones">
+                <!-- マイルストーンが達成された際に表示するメッセージや報酬 -->
+            </div>
+        
+            <button id="toSection1">診断チェックへ戻る</button>
+            <button id="toSection2">タスク管理へ</button>
+        </div>        
+    
+        <!-- タスク管理のセクション -->
+        <div id="section2" class="container" style="display: none;">
+            <h2>タスク管理</h2>
+            <!-- タスク追加フォーム -->
+            <form id="taskForm">
+                <input type="text" id="taskInput" placeholder="タスクを追加...">
+                <!-- 緊急度と重要度の選択 -->
+                <label>
+                    緊急度:
+                    <select id="urgency">
+                        <option value="3">🌞 (高)</option>
+                        <option value="2">🌥️ (中)</option>
+                        <option value="1">🌧️ (低)</option>
+                    </select>
+                </label>
+                <label>
+                    重要度:
+                    <select id="importance">
+                        <option value="3">🌞 (高)</option>
+                        <option value="2">🌥️ (中)</option>
+                        <option value="1">🌧️ (低)</option>
+                    </select>
+                </label>
+                <!-- 日付選択フィールドを追加 -->
+                <label>
+                    日付:
+                    <input type="date" id="taskDate">
+                </label>
+                <button type="submit">追加</button>
+            </form>
+            
+            <!-- タスクリストの表示エリア -->
+            <ul id="taskList"></ul>
+            <button id="toSection1">診断チェックへ戻る</button>
+            <button id="toSection3">振り返りへ</button>
+            <button id="toDashboard">ダッシュボードへ</button>
+        </div>
+    
+        <!-- 振り返り機能のセクション -->
+        <div id="section3" class="container" style="display: none;">
+            <h2>今週の振り返り</h2>
+            <textarea id="weeklyReflection" placeholder="今週頑張ったことや、来週の目標を記入..."></textarea>
+            <button id="saveReflection">保存</button>
+            <!-- 可愛いマスコットの応援メッセージ表示エリア -->
+            <div id="mascotMessage"></div>
+            <button id="toSection2">タスク管理へ戻る</button>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 タイムマネジメント診断サイト by Givin' Back Inc. All rights reserved.</p>
+        </footer>
+    
+        <!-- JavaScriptファイルを読み込む -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="script.js"></script>
+    </body>
+    </html>
+    

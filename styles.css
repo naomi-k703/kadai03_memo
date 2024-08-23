@@ -1,0 +1,263 @@
+/* ページ全体の基本スタイル */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f4ef;
+    color: #333;
+}
+
+/* コンテンツを中央に配置するコンテナ */
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* ページタイトルとセクションタイトルのスタイル */
+h1, h2, h3 {
+    text-align: center;
+    color: #d66b7d;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* ラベルとインプットの基本スタイル */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #5b5b5b;
+}
+
+input[type="text"], input[type="password"], input[type="date"], textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+/* ラジオボタンのスタイル */
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* 共通ボタンスタイル */
+.btn, button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #d66b7d;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn:hover, button[type="submit"]:hover {
+    background-color: #c0586c;
+}
+
+/* 診断結果エリアのスタイル */
+.result {
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: #f4e7e7;
+    padding: 15px;
+    border-left: 4px solid #d66b7d;
+    border-radius: 4px;
+}
+
+/* 画像のサイズを50%に縮小する */
+/* もとのサイズの半分にするために、widthとheightを50%に設定します。 */
+.result img {
+    width: 50%;   /* 画像の横幅を50%に設定 */
+    height: 50%;  /* 画像の高さを50%に設定 */
+    display: block; /* 画像をブロック要素として表示 */
+    margin: 0 auto; /* 画像を中央に配置するために、左右のマージンを自動に設定 */
+}
+
+/* 進捗バーのスタイル */
+.progress-bar {
+    background-color: #f3f3f3;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    height: 10px;
+    display: none;
+}
+
+.progress {
+    background-color: #d66b7d;
+    height: 100%;
+}
+
+/* タスクリストのスタイル */
+#taskList {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+#taskList li {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#taskList li button {
+    padding: 5px 10px;
+    background-color: #d66b7d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#taskList li button:hover {
+    background-color: #c0586c;
+}
+
+/* 振り返りのテキストエリア */
+#weeklyReflection {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* マスコットメッセージのスタイル */
+#mascotMessage {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+    color: #d66b7d;
+}
+
+/* レーダーチャートのスタイル */
+#radarChart {
+    max-width: 100%;
+    margin-top: 20px;
+}
+
+/* 言語切り替えボタン */
+.language-switcher {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.language-switcher button {
+    background-color: #d66b7d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.language-switcher button:hover {
+    background-color: #c0586c;
+}
+
+/* フッター */
+footer {
+    background-color: #e1c0b6;
+    color: indianred;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* ラジオボタンデザイン */
+input[type=radio] {
+    display: none;
+}
+
+.radio04 {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 24px;
+    color: #5b5b5b;
+}
+
+.radio04:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #f5f7f9; /* ボタンの背景色 */
+    border: 1px solid #ccc; /* ボーダーを追加 */
+}
+
+input[type=radio]:checked + .radio04:after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ffd500; /* 選択時の円の色を黄色に設定 */
+    top: 7px;
+    left: 7px;
+}
+
+/* ダッシュボードセクション内の進捗バー */
+#progressBarContainer {
+    margin-bottom: 20px;
+}
+
+#progressBarBackground {
+    background-color: #f3f3f3;
+    border-radius: 6px;
+    overflow: hidden;
+    height: 10px;
+}
+
+#progressBarFill {
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+/* 特別なメッセージ */
+#specialMessage {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f4e7e7;
+    border-left: 4px solid #d66b7d;
+    border-radius: 4px;
+}
+
+#specialMessage h4 {
+    margin-bottom: 10px;
+}
+
+#specialMessage p {
+    font-size: 16px;
+    color: #333;
+}
+
