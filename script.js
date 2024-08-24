@@ -158,7 +158,7 @@ document.getElementById('diagnosisForm').addEventListener('submit', function(eve
 
 function displayResults(level, steps) {
     const levelNames = ["Assistant.Maneger", "Jr.Maneger", "Standard.Maneger", "General.Maneger", "Master.Maneger"];
-    const characterImages = ["/img/step1.png", "/img/step2.png", "/img/step3.png", "/img/step4.png", "/img/step5.png"];
+    const characterImages = ["img/step1.png", "img/step2.png", "img/step3.png", "img/step3.png", "img/step5.png"];
     
     const levelDescriptions = [
         "step1:頑張ってるね！タイムマネジメントの基礎を学んでいる段階！✨",
